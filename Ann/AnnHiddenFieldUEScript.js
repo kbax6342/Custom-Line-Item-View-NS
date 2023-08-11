@@ -41,9 +41,16 @@ define(['N/currentRecord', 'N/record', 'N/recordContext', 'N/redirect', 'N/rende
                 var AnnNumber = employeeNameFieldLookUp.internalid[0].value
 
 
-                log.debug("Ann id", AnnNumber)
+                var status = record.getValue({
+                    fieldId: 'status'
+                })
+
+                log.debug("Status", status)
+
 
                     const annTyler = 4
+                if( status === "Pending Fulfillment" || status === "Cancelled" || status === "Partially Fulfilled" ||
+                    status === "Pending Billing/Partially Fulfilled" || status === "Pending Billing" ) {
 
                     hideColumnField(scriptContext.form, 'item', 'custcol_lf_follett_retail')
                     hideColumnField(scriptContext.form, 'item', 'custcol_lf_design')
@@ -126,6 +133,9 @@ define(['N/currentRecord', 'N/record', 'N/recordContext', 'N/redirect', 'N/rende
                     hideColumnField(scriptContext.form, 'item', 'custcol_lf_item_color')
                     hideColumnField(scriptContext.form, 'item', 'custcol_lf_rally_house_vpn')
                     hideColumnField(scriptContext.form, 'item', 'custcol2')
+                }
+
+
 
 
 
