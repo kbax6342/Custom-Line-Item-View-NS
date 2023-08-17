@@ -20,14 +20,7 @@ define(['N/search', 'N/ui/serverWidget'],
         const beforeLoad = (scriptContext) => {
             try {
 
-                var status = record.getValue({
-                    fieldId: 'status'
-                })
-
-                log.debug("Status", status)
-
-                if( status === "Pending Fulfillment" || status === "Cancelled" || status === "Partially Fulfilled" ||
-                    status === "Pending Billing/Partially Fulfilled" || status === "Pending Billing" ) {
+                if (scriptContext.type !== scriptContext.UserEventType.EDIT) {
                     hideColumnField(scriptContext.form, 'item', 'custcol_lf_follett_retail')
                     hideColumnField(scriptContext.form, 'item', 'custcol_lf_design')
                     hideColumnField(scriptContext.form, 'item', 'custcol_lf_price_level')

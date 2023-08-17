@@ -19,14 +19,10 @@ define(['N/search', "N/ui/serverWidget"],
         const beforeLoad = (scriptContext) => {
             try {
 
-                var status = record.getValue({
-                    fieldId: 'status'
-                })
 
-                log.debug("Status", status)
+                if (scriptContext.type !== scriptContext.UserEventType.EDIT) {
 
-                if( status === "Pending Fulfillment" || status === "Cancelled" || status === "Partially Fulfilled" ||
-                    status === "Pending Billing/Partially Fulfilled" || status === "Pending Billing" ) {
+
                     hideColumnField(scriptContext.form, 'item', 'custcol_lf_follett_retail')
                     hideColumnField(scriptContext.form, 'item', 'custcol_lf_design')
                     hideColumnField(scriptContext.form, 'item', 'custcol_lf_price_level')
@@ -111,11 +107,10 @@ define(['N/search', "N/ui/serverWidget"],
                     hideColumnField(scriptContext.form, 'item', 'custcol_scm_customerpartnumber')
                     hideColumnField(scriptContext.form, 'item', 'custcol_scm_itemsub_original_item')
                     hideColumnField(scriptContext.form, 'item', 'custcol_lf_all_assembly_inventory')
-                    hideColumnField(scriptContext.form, 'item', 'custcol_establishment_code')
-                    hideColumnField(scriptContext.form, 'item', 'custcol_establishment_code')
-                    hideColumnField(scriptContext.form, 'item', 'custcol_establishment_code')
-                    hideColumnField(scriptContext.form, 'item', 'custcol_establishment_code')
+
+
                 }
+
 
             } catch (e) {
                 log.error({

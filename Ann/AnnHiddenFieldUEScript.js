@@ -26,31 +26,7 @@ define(['N/currentRecord', 'N/record', 'N/recordContext', 'N/redirect', 'N/rende
          */
         const beforeLoad = (scriptContext) => {
             try {
-                const userObj = runtime.getCurrentUser();
-
-                const record = scriptContext.newRecord
-                const type = scriptContext.type
-                var AnnID = 4
-
-                var employeeNameFieldLookUp = search.lookupFields({
-                    type: search.Type.EMPLOYEE,
-                    id:  AnnID,
-                    columns: ["firstname", "internalid"]
-                });
-
-                var AnnNumber = employeeNameFieldLookUp.internalid[0].value
-
-
-                var status = record.getValue({
-                    fieldId: 'status'
-                })
-
-                log.debug("Status", status)
-
-
-                    const annTyler = 4
-                if( status === "Pending Fulfillment" || status === "Cancelled" || status === "Partially Fulfilled" ||
-                    status === "Pending Billing/Partially Fulfilled" || status === "Pending Billing" ) {
+                if (scriptContext.type !== scriptContext.UserEventType.EDIT) {
 
                     hideColumnField(scriptContext.form, 'item', 'custcol_lf_follett_retail')
                     hideColumnField(scriptContext.form, 'item', 'custcol_lf_design')
